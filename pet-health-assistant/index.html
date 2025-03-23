@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .photo-upload-preview {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-paw text-indigo-600 text-2xl"></i>
+                        <span class="ml-2 text-xl font-semibold text-gray-900">PetCare</span>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center sm:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden sm:flex sm:space-x-8">
+                    <a href="#" class="nav-link active" data-page="home">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="#" class="nav-link" data-page="profiles">
+                        <i class="fas fa-paw"></i> Pet Profiles
+                    </a>
+                    <a href="#" class="nav-link" data-page="reminders">
+                        <i class="fas fa-bell"></i> Reminders
+                    </a>
+                    <a href="#" class="nav-link" data-page="health-records">
+                        <i class="fas fa-notes-medical"></i> Health Records
+                    </a>
+                    <a href="#" class="nav-link" data-page="advice">
+                        <i class="fas fa-question-circle"></i> Quick Advice
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Navigation Menu -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="nav-link-mobile active" data-page="home">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#" class="nav-link-mobile" data-page="profiles">
+                    <i class="fas fa-paw"></i> Pet Profiles
+                </a>
+                <a href="#" class="nav-link-mobile" data-page="reminders">
+                    <i class="fas fa-bell"></i> Reminders
+                </a>
+                <a href="#" class="nav-link-mobile" data-page="health-records">
+                    <i class="fas fa-notes-medical"></i> Health Records
+                </a>
+                <a href="#" class="nav-link-mobile" data-page="advice">
+                    <i class="fas fa-question-circle"></i> Quick Advice
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Pet Profiles Page -->
+        <section id="profiles" class="page hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-6">Pet Profiles</h2>
+                <form id="pet-profile-form" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pet Name</label>
+                            <input type="text" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Breed</label>
+                            <input type="text" name="breed" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                            <input type="text" name="age" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 2 years">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Weight</label>
+                            <input type="text" name="weight" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 25 lbs">
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pet Photo</label>
+                        <div class="flex items-center space-x-4">
+                            <input type="file" 
+                                   id="pet-photo" 
+                                   accept="image/*"
+                                   class="block w-full text-sm text-gray-500
+                                          file:mr-4 file:py-2 file:px-4
+                                          file:rounded-md file:border-0
+                                          file:text-sm file:font-semibold
+                                          file:bg-indigo-50 file:text-indigo-700
+                                          hover:file:bg-indigo-100">
+                            <img id="photo-preview" 
+                                 src="#" 
+                                 alt="Pet photo preview" 
+                                 class="hidden photo-upload-preview">
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Medical History</label>
+                        <textarea name="medical-history" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Vaccinations</label>
+                        <textarea name="vaccinations" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md" 
+                                 placeholder="List vaccinations and dates"></textarea>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
+                        <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+
+                    <button type="submit" class="mt-6 bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">
+                        Add Profile
+                    </button>
+                </form>
+
+                <div id="profiles-list" class="space-y-6"></div>
+            </div>
+        </section>
+
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-900 mb-8">Welcome to PetCare Assistant</h1>
+                <p class="text-xl text-gray-600 mb-8">Your digital companion for managing your pet's health and well-being</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-bell text-4xl text-indigo-600 mb-4"></i>
+                        <h2 class="text-xl font-semibold mb-2">Reminders</h2>
+                        <p class="text-gray-600">Never miss important pet care tasks with customizable reminders</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-notes-medical text-4xl text-indigo-600 mb-4"></i>
+                        <h2 class="text-xl font-semibold mb-2">Health Records</h2>
+                        <p class="text-gray-600">Keep track of your pet's health history and medical records</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-question-circle text-4xl text-indigo-600 mb-4"></i>
+                        <h2 class="text-xl font-semibold mb-2">Quick Advice</h2>
+                        <p class="text-gray-600">Get instant guidance for common pet health concerns</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reminders Page -->
+        <section id="reminders" class="page hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-6">Pet Care Reminders</h2>
+                <form id="reminder-form" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                            <input type="text" id="reminder-title" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date & Time</label>
+                            <input type="datetime-local" 
+                                   id="reminder-datetime" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md" 
+                                   required>
+                            <p class="mt-1 text-sm text-gray-500">Select a future date and time for the reminder</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                        <textarea id="reminder-notes" class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+                        Add Reminder
+                    </button>
+                </form>
+                <div id="reminders-list" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- Health Records Page -->
+        <section id="health-records" class="page hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-6">Pet Health Records</h2>
+                <form id="health-record-form" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                            <input type="date" id="record-date" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                            <select id="record-type" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                                <option value="">Select type</option>
+                                <option value="vaccination">Vaccination</option>
+                                <option value="checkup">Regular Checkup</option>
+                                <option value="medication">Medication</option>
+                                <option value="surgery">Surgery</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                        <textarea id="record-notes" class="w-full px-3 py-2 border border-gray-300 rounded-md" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+                        Add Health Record
+                    </button>
+                </form>
+                <div id="health-records-list" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- Quick Advice Page -->
+        <section id="advice" class="page hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-6">Quick Pet Health Advice</h2>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Select a common issue:</label>
+                    <select id="issue-selector" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        <option value="">Choose an issue</option>
+                        <option value="vomiting">Vomiting</option>
+                        <option value="diarrhea">Diarrhea</option>
+                        <option value="lethargy">Lethargy</option>
+                        <option value="loss-of-appetite">Loss of Appetite</option>
+                        <option value="excessive-thirst">Excessive Thirst</option>
+                    </select>
+                </div>
+                <div id="advice-content" class="hidden p-4 bg-gray-50 rounded-md">
+                    <!-- Advice content will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-300">© 2024 PetCare Assistant. All rights reserved.</p>
+                <p class="text-gray-400 mt-2">
+                    Disclaimer: This app is not a substitute for professional veterinary advice.
+                    Always consult with a qualified veterinarian for pet health concerns.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
